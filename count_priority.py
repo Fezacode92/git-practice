@@ -13,3 +13,5 @@ def count_by_priority(ticket_list, priority):
     return count
 
 print(count_by_priority(tickets, "high"))
+
+print(count_by_priority(tickets, "low"))

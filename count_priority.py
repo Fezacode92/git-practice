@@ -15,3 +15,11 @@ def count_by_priority(ticket_list, priority):
 print(count_by_priority(tickets, "high"))
 
 print(count_by_priority(tickets, "high"))
+
+ticket_number = input("Ticket number to view: ")
+try:
+    print(tickets[int(ticket_number)])
+except ValueError:
+    print("Please type a number, like 0 or 1.")
+except IndexError:
+    print("Ticket not found, choose 0 to 3.")

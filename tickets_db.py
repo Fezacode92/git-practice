@@ -34,12 +34,6 @@ def buscar_cliente(nombre):
 
 actualizar_prioridad("Marta", "alta")
 
-
-cursor.execute(
-    "UPDATE tickets SET prioridad = ? WHERE cliente = ?",
-    ("alta", "Luis")
-)
-
 cursor.execute("SELECT * FROM tickets")
 filas = cursor.fetchall()
 

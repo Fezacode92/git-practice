@@ -11,21 +11,28 @@ CREATE TABLE IF NOT EXISTS tickets (
 )
 """)
 
-# cursor.execute(
-#     "INSERT INTO tickets (cliente, prioridad) VALUES (?, ?)",
-#     ("Ana", "alta")
-# )
-# cursor.execute(
-#     "INSERT INTO tickets (cliente, prioridad) VALUES (?, ?)",
-#     ("Luis", "baja")
-# )
+def crear_ticket(cliente, prioridad):
+    cursor.execute(
+        "INSERT INTO tickets (cliente, prioridad) VALUES (?, ?)",
+        (cliente, prioridad)
+    )
+    conn.commit()
 
-cursor.execute(
-    "UPDATE tickets SET prioridad = ? WHERE cliente = ?",
-    ("alta", "Luis")
-)
-cursor.execute("DELETE FROM tickets WHERE id > ?", (2,))
-conn.commit()
+def actualizar_prioridad(cliente, nueva):
+    cursor.execute(
+        "UPDATE tickets SET prioridad = ? WHERE cliente = ?",
+        (nueva, cliente)
+    )
+    conn.commit()
+
+def buscar_cliente(nombre):
+    cursor.execute(
+        "SELECT * FROM tickets WHERE cliente = ?",
+        (nombre,)
+    )
+    return cursor.fetchall()
+
+actualizar_prioridad("Marta", "alta")
 
 cursor.execute("SELECT * FROM tickets")
 filas = cursor.fetchall()
@@ -33,5 +40,6 @@ filas = cursor.fetchall()
 for fila in filas:
     print(fila)
 
+print(buscar_cliente("Luis"))
 conn.close()
 print("Database ready")

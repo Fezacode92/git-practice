@@ -32,14 +32,23 @@ def buscar_cliente(nombre):
     )
     return cursor.fetchall()
 
-actualizar_prioridad("Marta", "alta")
+def borrar_ticket(id_ticket):
+    cursor.execute(
+        "DELETE FROM tickets WHERE id = ?",
+        (id_ticket,)
+    )
+    conn.commit()
 
-cursor.execute("SELECT * FROM tickets")
+actualizar_prioridad("Ana", "baja")
+
+cursor.execute("SELECT * FROM tickets ORDER BY cliente DESC")
 filas = cursor.fetchall()
 
 for fila in filas:
     print(fila)
 
 print(buscar_cliente("Luis"))
+cursor.execute("SELECT prioridad, COUNT(*) FROM tickets GROUP BY prioridad")
+print(cursor.fetchall())
 conn.close()
 print("Database ready")
